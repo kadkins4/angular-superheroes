@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Superhero Phone Book</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
-  <script src="app.js"></script>
-</head>
-<body>
-</body>
+  <head>
+    <meta charset="UTF-8">
+    <title>Superhero Phone Book</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="app.js"></script>
+  </head>
+  <body ng-app="superheroPhonebook" ng-controller="SuperheroController as vm">
+    <h1>SuperHero PhoneBook</h1>
+    <section>
+      <label>Search: <input ng-model="searchText.name"></label>
+      <ul>
+        <li ng-repeat="hero in vm.heroes | filter:searchText">
+          <div class="phone" ng-class="hero.comics_affiliation === 'Marvel' ? 'red' : 'blue'">
+            <p>Name: {{hero.name}}</p> <button ng-click='vm.viewImg[$index] = !vm.viewImg[$index]'>Show/Hide Pic</button>
+            <p>Call Sign: {{hero.phone_number}}</p>
+            <p>Affiliation: {{hero.comics_affiliation}}</p>
+            <img class="hero" ng-src="{{hero.image_url}}" ng-show='vm.viewImg[$index]'>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </body>
 </html>
